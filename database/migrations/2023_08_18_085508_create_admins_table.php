@@ -16,11 +16,13 @@ return new class extends Migration
             $table->string('first_name', 100);
             $table->string('last_name', 100);
             $table->string('username', 100)->nullable();
-            $table->string('email', $length);
+            $table->string('email', $length)->unique();
             $table->string('phone', 20)->nullable();
             $table->string('password', 100);
             $table->boolean('active')->default(0)->nullable();
             $table->timestamps();
+            
+            $table->index(['first_name', 'last_name', 'username', 'email', 'phone']);
         });
     }
 
