@@ -1,7 +1,11 @@
 <?php
 
+// Misc
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+// Admin
+use App\Http\Controllers\Admin\UserController as ApiAdminUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('admin')->group(function () {
+    
+    // Users
+    Route::prefix('users')->group(function () {
+        Route::post('store', [ApiAdminUserController::class, 'store'])->name('api.admin.users.store');
+    });
+    
 });
