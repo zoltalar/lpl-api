@@ -14,10 +14,14 @@ class UserStoreRequest extends BaseRequest
 
     public function rules(): array
     {
-        $length = Base::DEFAULT_STRING_LENGTH;
+        $length = Base::DEFAULT_STRING_LENGTH;        
+        $rules = ['email' => ['required', 'email', "max:{$length}", 'unique:users,email']];
+        $password = $this->password;
         
-        return [
-            'email' => ['required', 'email', "max:{$length}"],
-        ];
+        if (! empty($password)) {
+            $rules['password'] = ['string', 'min:8'];
+        }
+        
+        return $rules;        
     }
 }

@@ -35,6 +35,19 @@ class User extends Base
     ];
     
     // --------------------------------------------------
+    // Accessors and Mutators
+    // --------------------------------------------------
+    
+    public function setPasswordAttribute($value): void
+    {
+        if (! empty($value)) {
+            $value = bcrypt($value);
+        }
+        
+        $this->attributes['password'] = $value;
+    }
+    
+    // --------------------------------------------------
     // Other
     // --------------------------------------------------
     
