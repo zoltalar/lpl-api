@@ -12,7 +12,14 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = QueryBuilder::for(User::class)->paginate();
+        $users = QueryBuilder::for(User::class)
+            ->allowedSorts([
+                'users.id',
+                'users.email',
+                'users.confirmed',
+                'users.blacklisted'
+            ])
+            ->paginate();
         
         return BaseResource::collection($users);
     }
