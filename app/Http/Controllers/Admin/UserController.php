@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserStoreRequest;
 use App\Http\Resources\BaseResource;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -14,6 +15,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
+        $limit = $request->get('limit', 5);
         
         $users = QueryBuilder::for(User::class)
             ->when($search, function($query) use ($search) {
@@ -25,7 +27,7 @@ class UserController extends Controller
                 'users.confirmed',
                 'users.blacklisted'
             ])
-            ->paginate();
+            ->paginate($limit);
         
         return BaseResource::collection($users);
     }
@@ -43,5 +45,18 @@ class UserController extends Controller
         $user->save();
         
         return new BaseResource($user);
+    }
+    
+    public function destroy(User $user)
+    {
+        $status = 403;
+        
+        try {
+            if ($user->delete()) {
+                $status = 204;
+            }
+        } catch (Exception $e) {}
+        
+        return response()->json(null, $status);
     }
 }

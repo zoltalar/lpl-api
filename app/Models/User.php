@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
@@ -45,6 +46,15 @@ class User extends Base
         }
         
         $this->attributes['password'] = $value;
+    }
+    
+    // --------------------------------------------------
+    // Relations
+    // --------------------------------------------------
+    
+    public function lists(): BelongsToMany
+    {
+        return $this->belongsToMany(_List::class);
     }
     
     // --------------------------------------------------
