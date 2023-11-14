@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        $limit = $request->get('limit', 5);
+        $limit = $request->get('limit', 10);
         
         $users = QueryBuilder::for(User::class)
             ->when($search, function($query) use ($search) {

@@ -33,11 +33,22 @@ class User extends Base
         'blacklisted' => 'integer',
         'opted_in' => 'integer',
         'bounce_count' => 'integer',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s'
     ];
     
+    protected $appends = ['password_set'];
+
     // --------------------------------------------------
     // Accessors and Mutators
     // --------------------------------------------------
+    
+    public function getPasswordSetAttribute($value): int
+    {
+        $isset = $this->attributes['password'] !== null;
+        
+        return $isset ? 1 : 0;
+    }
     
     public function setPasswordAttribute($value): void
     {

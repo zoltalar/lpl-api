@@ -1,10 +1,10 @@
 <?php
 
 // Misc
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Admin
+use App\Http\Controllers\Admin\ListController as ApiAdminListController;
 use App\Http\Controllers\Admin\UserController as ApiAdminUserController;
 
 /*
@@ -19,6 +19,11 @@ use App\Http\Controllers\Admin\UserController as ApiAdminUserController;
 */
 
 Route::prefix('admin')->group(function () {
+    
+    // Lists
+    Route::prefix('lists')->group(function () {
+        Route::get('index', [ApiAdminListController::class, 'index'])->name('api.admin.lists.index');
+    });
     
     // Users
     Route::prefix('users')->group(function () {
