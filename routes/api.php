@@ -23,6 +23,7 @@ Route::prefix('admin')->group(function () {
     // Lists
     Route::prefix('lists')->group(function () {
         Route::get('index', [ApiAdminListController::class, 'index'])->name('api.admin.lists.index');
+        Route::post('store', [ApiAdminListController::class, 'store'])->name('api.admin.lists.store');
     });
     
     // Users

@@ -18,6 +18,7 @@ class UserController extends Controller
         $limit = $request->get('limit', 10);
         
         $users = QueryBuilder::for(User::class)
+            ->with(['lists'])
             ->when($search, function($query) use ($search) {
                 return $query->search(['email'], $search);
             })

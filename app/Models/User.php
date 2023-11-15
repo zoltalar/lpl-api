@@ -65,7 +65,7 @@ class User extends Base
     
     public function lists(): BelongsToMany
     {
-        return $this->belongsToMany(_List::class);
+        return $this->belongsToMany(_List::class, 'lists_users', 'user_id', 'list_id');
     }
     
     // --------------------------------------------------
