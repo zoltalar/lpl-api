@@ -14,6 +14,8 @@ return new class extends Migration
             
             $table->smallIncrements('id');
             $table->string('name', $length)->unique();
+            
+            $table->index(['name']);
         });
     }
 

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->smallInteger('category_id')->unsigned()->nullable();
             $table->timestamps();
             
+            $table->index(['name', 'description']);
+            
             $table->foreign('category_id')
                 ->references('id')
                 ->on('categories')

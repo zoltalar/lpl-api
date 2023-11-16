@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 
 // Admin
+use App\Http\Controllers\Admin\CategoryController as ApiAdminCategoryController;
 use App\Http\Controllers\Admin\ListController as ApiAdminListController;
 use App\Http\Controllers\Admin\UserController as ApiAdminUserController;
 
@@ -19,6 +20,12 @@ use App\Http\Controllers\Admin\UserController as ApiAdminUserController;
 */
 
 Route::prefix('admin')->group(function () {
+    
+    // Categories
+    Route::prefix('categories')->group(function () {
+        Route::get('index', [ApiAdminCategoryController::class, 'index'])->name('api.admin.categories.index');
+        Route::post('store', [ApiAdminCategoryController::class, 'store'])->name('api.admin.categories.store');
+    });
     
     // Lists
     Route::prefix('lists')->group(function () {
