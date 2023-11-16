@@ -31,6 +31,7 @@ Route::prefix('admin')->group(function () {
     Route::prefix('lists')->group(function () {
         Route::get('index', [ApiAdminListController::class, 'index'])->name('api.admin.lists.index');
         Route::post('store', [ApiAdminListController::class, 'store'])->name('api.admin.lists.store');
+        Route::delete('destroy/{list}', [ApiAdminListController::class, 'destroy'])->name('api.admin.lists.destroy');
     });
     
     // Users

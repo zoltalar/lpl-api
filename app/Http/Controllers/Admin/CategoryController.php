@@ -15,6 +15,7 @@ class CategoryController extends Controller
     {
         $search = $request->search;
         $limit = $request->get('limit', 10);
+        $all = $request->all;
         
         $categories = QueryBuilder::for(Category::class)
             ->when($search, function($query) use ($search) {
@@ -23,8 +24,9 @@ class CategoryController extends Controller
             ->allowedSorts([
                 'categories.id',
                 'categories.name'
-            ])
-            ->paginate($limit);
+            ]);
+            
+        $categories = ($all ? $categories->get() : $categories->paginate($limit));
         
         return BaseResource::collection($categories);
     }
