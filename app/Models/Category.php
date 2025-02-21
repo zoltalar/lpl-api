@@ -17,7 +17,7 @@ class Category extends Base
     // Relations
     // --------------------------------------------------
     
-    protected function lists(): HasMany
+    public function lists(): HasMany
     {
         return $this->hasMany(_List::class);
     }

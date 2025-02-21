@@ -18,6 +18,7 @@ class CategoryController extends Controller
         $all = $request->all;
         
         $categories = QueryBuilder::for(Category::class)
+            ->withCount(['lists'])
             ->when($search, function($query) use ($search) {
                 return $query->search(['name'], $search);
             })

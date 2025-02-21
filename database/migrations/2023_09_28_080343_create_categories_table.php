@@ -12,7 +12,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $length = Base::DEFAULT_STRING_LENGTH;
             
-            $table->smallIncrements('id');
+            $table->increments('id');
             $table->string('name', $length)->unique();
             
             $table->index(['name']);

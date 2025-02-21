@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->smallInteger('list_order')->unsigned()->nullable();
             $table->boolean('active')->default(0)->nullable();
-            $table->smallInteger('category_id')->unsigned()->nullable();
+            $table->integer('category_id')->unsigned()->nullable();
             $table->timestamps();
             
             $table->index(['name', 'description']);
